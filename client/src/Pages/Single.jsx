@@ -46,24 +46,26 @@ const Single = () => {
     }
   }
 
-  function getText(html) {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent;
-  }
+  // function getText(html) {
+  //   const doc = new DOMParser().parseFromString(html, "text/html");
+  //   return doc.body.textContent;
+  // }
 
   return (
     <div className="single">
       <div className="content">
         <img src={`../upload/${post?.img}`} alt="imageof gg" />
         <div className="user">
-          <img src={post?.userImg} alt="" />
+          <img src={post?.userImg} alt="imageof pp" />
           <div className="info">
             {post.username && (
               <span>
                 {post.username[0].toUpperCase() + post.username.slice(1)}
               </span>
             )}
-            <p>Posted {moment(new Date("13 sep 2023")).fromNow()}</p>
+            <p>Posted {moment(new Date("24 Oct 2024")).fromNow()}</p>
+            {/* <p>Posted {moment(post.createdAt).fromNow()}</p> */}
+            {/* <p>Posted {moment().fromNow()}</p> */}
           </div>
           {currentUser?.username === post.username && (
             <div className="edit">
@@ -75,6 +77,7 @@ const Single = () => {
           )}
         </div>
         <h1>{post.title}</h1>
+        {/* {getText(post.details)} */}
         <p
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.details),

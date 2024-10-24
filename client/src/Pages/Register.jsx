@@ -6,13 +6,14 @@ const initialvalue = {
   username: "",
   email: "",
   password: "",
+  profilePic: "",
 };
 
 const Register = () => {
   const [inputs, setInputs] = useState(initialvalue);
   const [error, setError] = useState(null);
 
-  const { username, email, password } = inputs;
+  const { username, email, password, profilePic } = inputs;
 
   function handleChange(e) {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -20,6 +21,7 @@ const Register = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
       const res = await axios.post(
         "http://127.0.0.1:8000/api/auth/register",
@@ -63,6 +65,14 @@ const Register = () => {
           onChange={handleChange}
           value={password}
           name="password"
+        />
+        <input
+          required
+          type="file"
+          placeholder="Profile Photo"
+          onChange={handleChange}
+          value={profilePic}
+          name="profilePic"
         />
         <input type="submit" />
         {error && <p>{error}</p>}

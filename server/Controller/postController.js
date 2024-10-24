@@ -23,12 +23,13 @@ exports.getPost = (req, res) => {
                         title,
                         details,
                         p.img,
-                        u.img AS userImg,
+                        u.profilePic AS userImg,
                         cat,
                         date
                         FROM users u
                         JOIN posts p
                         ON u.id = p.uid WHERE p.id=?`;
+
   pool.query(query, [req.params.id], (err, result) => {
     if (err) return console.log(err.message);
     else {
@@ -55,6 +56,7 @@ exports.addPosts = (req, res) => {
       req.body.date,
       userInfo.id,
     ];
+
     const query = `INSERT INTO posts (title,details,img,cat,date,uid) VALUES (?)`;
     pool.query(query, [values], (err, result) => {
       if (err) {
